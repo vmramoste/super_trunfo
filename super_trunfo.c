@@ -4,15 +4,17 @@
 int main(){
     /* Variáveis para Carta 1*/
     char estado_1, codigo_carta_1[5], nome_cidade_1[20];
-    int populacao_1, numero_pontos_turisticos_1;
+    unsigned long int populacao_1;
+    int numero_pontos_turisticos_1;
     double area_km_1, pib_1;
-    float densidade_populacional_1, pib_per_capta_1;
+    float densidade_populacional_1, pib_per_capta_1, super_poder_1;
 
     /* Variáveis para Carta 2*/
     char estado_2, codigo_carta_2[5], nome_cidade_2[20];
-    int populacao_2, numero_pontos_turisticos_2;
+    unsigned long int populacao_2;
+    int numero_pontos_turisticos_2;
     double area_km_2, pib_2;
-    float densidade_populacional_2, pib_per_capta_2;
+    float densidade_populacional_2, pib_per_capta_2, super_poder_2;
 
     /* Pegar informações para Carta 1*/
     printf("Qual a letra que representa o Estado para esta carta? (Entre 'A' e 'H') ");
@@ -26,13 +28,17 @@ int main(){
     /* Limparemos 'nome_cidade' do valor que pode ter sido inserido "\n" na string */
     nome_cidade_1[strcspn(nome_cidade_1, "\n")] = 0;
     printf("Qual a população da cidade da carta? ");
-    scanf("%d", &populacao_1);
+    scanf("%lu", &populacao_1);
+    getchar();
     printf("Qual sua área, em km²? ");
     scanf("%lf", &area_km_1);
+    getchar();
     printf("E seu PIB? ");
     scanf("%lf", &pib_1);
+    getchar();
     printf("Por último, quantos pontos turísticos essa cidade têm? ");
     scanf("%d", &numero_pontos_turisticos_1);
+    getchar();
 
     /* Pegar informações para Carta 2*/
     printf("Qual a letra que representa o Estado para esta carta? (Entre 'A' e 'H') ");
@@ -45,7 +51,7 @@ int main(){
     fgets(nome_cidade_2, 20, stdin);
     nome_cidade_2[strcspn(nome_cidade_2, "\n")] = 0;
     printf("Qual a população da cidade da carta? ");
-    scanf("%d", &populacao_2);
+    scanf("%lu", &populacao_2);
     printf("Qual sua área, em km²? ");
     scanf("%lf", &area_km_2);
     printf("E seu PIB? ");
@@ -59,12 +65,28 @@ int main(){
     densidade_populacional_2 = (float) populacao_2/area_km_2;
     pib_per_capta_2 = (float) pib_2/populacao_2;
 
+    // Calcular super poder
+    super_poder_1 = (float) (populacao_1 + area_km_1 + pib_1 + numero_pontos_turisticos_1 + pib_per_capta_1 + (1/densidade_populacional_1));
+    super_poder_2 = (float) (populacao_2 + area_km_2 + pib_2 + numero_pontos_turisticos_2 + pib_per_capta_2 + (1/densidade_populacional_2));
+
+    // Comparações
+    int compara_populacao = populacao_1 > populacao_2;
+    int compara_area = area_km_1 > area_km_2;
+    int compara_pib = pib_1 > pib_2;
+    int compara_pontos_turisticos = numero_pontos_turisticos_1 > numero_pontos_turisticos_2;
+    int compara_pib_capta = pib_per_capta_1 > pib_per_capta_2;
+    int compara_densidade_populacional = densidade_populacional_1 < densidade_populacional_2;
+    int compara_poder = super_poder_1 > super_poder_2;
+
     /* Exibição da carta 1 */
-    printf("Carta 1: \n Estado: %c \n Código: %s \n Nome Da Cidade: %s \n População: %d \n Área: %.2lf \n PIB: %.2lf Reais \n Número de Pontos turísticos: %d \n Densidade Populacional: %.2f \n PIB per Capta: %.2f Reais \n \n",
+    printf("Carta 1: \n Estado: %c \n Código: %s \n Nome Da Cidade: %s \n População: %lu \n Área: %.2lf \n PIB: %.2lf Reais \n Número de Pontos turísticos: %d \n Densidade Populacional: %.2f \n PIB per Capta: %.2f Reais \n \n",
     estado_1, codigo_carta_1, nome_cidade_1, populacao_1, area_km_1, pib_1, numero_pontos_turisticos_1, densidade_populacional_1, pib_per_capta_1);
 
     /* Exibição da carta 2 */
-    printf("Carta 2: \n Estado: %c \n Código: %s \n Nome Da Cidade: %s \n População: %d \n Área: %.2lf \n PIB: %.2lf Reais \n Número de Pontos turísticos: %d \n Densidade Populacional: %.2f \n PIB per Capta: %.2f Reais",
+    printf("Carta 2: \n Estado: %c \n Código: %s \n Nome Da Cidade: %s \n População: %lu \n Área: %.2lf \n PIB: %.2lf Reais \n Número de Pontos turísticos: %d \n Densidade Populacional: %.2f \n PIB per Capta: %.2f Reais \n",
     estado_2, codigo_carta_2, nome_cidade_2, populacao_2, area_km_2, pib_2, numero_pontos_turisticos_2, densidade_populacional_2, pib_per_capta_2);
+
+    // Exibição comparações
+    printf("Comparação de Cartas: \n População: %d \n Área: %d \n PIB: %d \n Pontos Turísticos: %d \n Densidade Populacional: %d \n PIB per Capta: %d \n Super Poder: %d \n", compara_populacao, compara_area, compara_pib, compara_pontos_turisticos, compara_densidade_populacional, compara_pib_capta, compara_poder);
 
 } 
