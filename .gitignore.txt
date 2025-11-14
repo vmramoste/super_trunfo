@@ -1,0 +1,39 @@
+# Arquivos executáveis
+*.exe
+*.out
+*.app
+
+# Arquivos objeto e de compilação
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+
+# Arquivos de debug
+*.pdb
+*.idb
+*.ilk
+
+# Backup files
+*~
+*.bak
+*.old
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+temp/
